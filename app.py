@@ -10,6 +10,19 @@ st.markdown(
     .stApp { background-color: #F0F4F8; }
     .stApp, .stApp p, .stApp label, .stApp li, .stApp h2, .stApp h3 { color: #1E1E2F; }
     [data-testid="stSidebar"] { background-color: #FFFFFF; }
+    
+    /* Fix button visibility in both Light and Dark modes */
+    div.stButton > button {
+        background-color: #FF4B2B !important;
+        border: none !important;
+    }
+    div.stButton > button p {
+        color: #FFFFFF !important;
+        font-weight: bold !important;
+    }
+    div.stButton > button:hover {
+        background-color: #E03E1F !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -246,8 +259,8 @@ if execute_pipeline:
         )
         st.markdown(
             f"""<div style="display: flex; gap: 20px; margin-bottom: 25px;">
-            <div style="background:#F8F9FA; border-top: 5px solid #FF9F43; padding: 15px; border-radius: 8px; width: 48%;">BMI: <strong style="font-size:22px;">{bmi}</strong></div>
-            <div style="background:#F8F9FA; border-top: 5px solid #00CFDD; padding: 15px; border-radius: 8px; width: 48%;">Water: <strong style="font-size:22px;">{water_intake}L</strong></div>
+            <div style="background:#F8F9FA; color:#1E1E2F; border-top: 5px solid #FF9F43; padding: 15px; border-radius: 8px; width: 48%;">BMI: <strong style="font-size:22px;">{bmi}</strong></div>
+            <div style="background:#F8F9FA; color:#1E1E2F; border-top: 5px solid #00CFDD; padding: 15px; border-radius: 8px; width: 48%;">Water: <strong style="font-size:22px;">{water_intake}L</strong></div>
         </div>""",
             unsafe_allow_html=True,
         )
@@ -259,7 +272,7 @@ if execute_pipeline:
             unsafe_allow_html=True,
         )
         st.markdown(
-            f'<div style="background:{"#E8F5E9" if assigned_group == 1 else "#E3F2FD"};'
+            f'<div style="background:{"#E8F5E9" if assigned_group == 1 else "#E3F2FD"}; color:#1E1E2F;'
             ' border-left: 6px solid #2E7D32; padding: 15px; border-radius:'
             ' 4px;">'
             f'{"Focus: Heavy compound lifts and progressive overload." if assigned_group == 1 else "Focus: High-intensity cardio and metabolic conditioning."}'
@@ -275,7 +288,7 @@ if execute_pipeline:
         )
         for m, f in DIET_DATABASE[dietary_restriction][assigned_group].items():
             st.markdown(
-                '<div style="background:#FFFDE7; border-left: 6px solid'
+                '<div style="background:#FFFDE7; color:#1E1E2F; border-left: 6px solid'
                 ' #FBC02D; padding: 15px; margin-bottom:10px; border-radius:'
                 f' 6px;"><strong>{m}:</strong> {f}</div>',
                 unsafe_allow_html=True,
