@@ -4,6 +4,9 @@ import streamlit as st
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
+# ==========================================
+# 0. PAGE COLORS & BUTTON STYLING
+# ==========================================
 st.markdown(
     """
     <style>
@@ -11,7 +14,7 @@ st.markdown(
     .stApp, .stApp p, .stApp label, .stApp li, .stApp h2, .stApp h3 { color: #1E1E2F; }
     [data-testid="stSidebar"] { background-color: #FFFFFF; }
     
-    /* Fix button visibility in both Light and Dark modes */
+    /* Make the main button coral-orange with white text in all themes */
     div.stButton > button {
         background-color: #FF4B2B !important;
         border: none !important;
@@ -19,18 +22,6 @@ st.markdown(
     div.stButton > button p {
         color: #FFFFFF !important;
         font-weight: bold !important;
-    }
-    div.stButton > button:hover {
-        background-color: #E03E1F !important;
-    }
-
-    /* Fix st.info and st.warning alert boxes in Dark Mode */
-    [data-testid="stAlert"] {
-        background-color: #D9E8F5 !important;
-        border-radius: 8px !important;
-    }
-    [data-testid="stAlert"] p, [data-testid="stAlert"] strong {
-        color: #1E1E2F !important;
     }
     </style>
     """,
@@ -190,7 +181,6 @@ st.sidebar.markdown(
     unsafe_allow_html=True,
 )
 
-# Unset defaults: Empty string for name
 user_name = st.sidebar.text_input("Name", value="", placeholder="Enter your name")
 age = st.sidebar.slider("Age (Years)", 15, 65, 18)
 weight = st.sidebar.slider("Weight (kg)", 40, 120, 65)
@@ -217,7 +207,6 @@ GOAL_OPTIONS = [
     "General Health & Energy",
 ]
 
-# Unset defaults: Blank list for goals selection
 selected_goals = st.sidebar.multiselect(
     "Select Goals (Pick 2+):",
     options=GOAL_OPTIONS,
@@ -225,7 +214,6 @@ selected_goals = st.sidebar.multiselect(
     placeholder="Choose your fitness goals...",
 )
 
-# Unset defaults: Selectbox starts with no selection
 dietary_restriction = st.sidebar.selectbox(
     "Diet Preference",
     ["Vegetarian", "Vegan", "Non-Vegetarian"],
@@ -241,13 +229,28 @@ execute_pipeline = st.button(
 )
 
 if execute_pipeline:
-    # Check input conditions
+    # Simple custom HTML alert box for warnings so it's readable in Dark Mode
     if not user_name.strip():
-        st.warning("⚠️ Please enter your name in the sidebar.")
+        st.markdown(
+            '<div style="background:#FFF3CD; color:#1E1E2F; border-left: 6px solid #FFC107; padding: 15px; border-radius: 6px;">'
+            '⚠️ Please enter your name in the sidebar.'
+            '</div>',
+            unsafe_allow_html=True,
+        )
     elif len(selected_goals) < 2:
-        st.warning("⚠️ Please select at least 2 goals in the sidebar.")
+        st.markdown(
+            '<div style="background:#FFF3CD; color:#1E1E2F; border-left: 6px solid #FFC107; padding: 15px; border-radius: 6px;">'
+            '⚠️ Please select at least 2 goals in the sidebar.'
+            '</div>',
+            unsafe_allow_html=True,
+        )
     elif dietary_restriction is None:
-        st.warning("⚠️ Please select a diet preference in the sidebar.")
+        st.markdown(
+            '<div style="background:#FFF3CD; color:#1E1E2F; border-left: 6px solid #FFC107; padding: 15px; border-radius: 6px;">'
+            '⚠️ Please select a diet preference in the sidebar.'
+            '</div>',
+            unsafe_allow_html=True,
+        )
     else:
         # Calculate scores when all inputs are valid
         goal_numeric = sum(
@@ -303,7 +306,10 @@ if execute_pipeline:
                 unsafe_allow_html=True,
             )
 else:
-    st.info(
-        "👈 Configure your profile details in the sidebar and click **GENERATE"
-        " MY OPTIMIZED PROTOCOL** to build your personalized plan."
+    # Simple custom HTML box for the instruction label (looks great in Light & Dark mode)
+    st.markdown(
+        '<div style="background:#E3F2FD; color:#1E1E2F; border-left: 6px solid #2196F3; padding: 15px; border-radius: 6px;">'
+        '👈 Configure your profile details in the sidebar and click <strong>GENERATE MY OPTIMIZED PROTOCOL</strong> to build your personalized plan.'
+        '</div>',
+        unsafe_allow_html=True,
     )
