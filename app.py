@@ -23,6 +23,15 @@ st.markdown(
     div.stButton > button:hover {
         background-color: #E03E1F !important;
     }
+
+    /* Fix st.info and st.warning alert boxes in Dark Mode */
+    [data-testid="stAlert"] {
+        background-color: #D9E8F5 !important;
+        border-radius: 8px !important;
+    }
+    [data-testid="stAlert"] p, [data-testid="stAlert"] strong {
+        color: #1E1E2F !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
