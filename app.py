@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
+
 st.markdown(
     """
     <style>
@@ -13,6 +14,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 # ==========================================
 # 1. MAIN HEADERS
 # ==========================================
