@@ -3,7 +3,16 @@ import pandas as pd
 import streamlit as st
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
-st.markdown("<style>.stApp { background-color: #F0F4F8; }</style>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+    .stApp { background-color: #F0F4F8; }
+    .stApp, .stApp p, .stApp label, .stApp li, .stApp h2, .stApp h3 { color: #1E1E2F; }
+    [data-testid="stSidebar"] { background-color: #FFFFFF; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 # ==========================================
 # 1. MAIN HEADERS
 # ==========================================
